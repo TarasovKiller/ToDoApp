@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %} View List{% endblock %}
+
+
+{% block content%}
+    <h1>{{ls.name}}</h1>
+        <form method="post" action="#">
+        {% csrf_token %}
+
+        {% for item in ls.item_set.all%}
+        <div class="input-group mb3">
+            {% comment %} <form method="post" action="#">
+                {% csrf_token %}
+                <!-- form fields go here -->
+                <button type="submit" onclick="return window.confirm('Are you sure you want to submit this form?');"><i class="fa-regular fa-trash-can fa-sm" style="color: #000000;"></i></button>
+              </form> {% endcomment %}
+                <button type="button" class="delete delete-item delete-button" data-object-id="{{item.id}}"><i class="fa-regular fa-trash-can fa-sm" style="color: #000000;"></i></button>
+                {% comment %} <a href="{% url 'delete_item' item.id %}" class="delete delete-item" data-id="{{ item.id }}"></a> {% endcomment %}
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    {% if item.complete == True%}
+                        <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
+                    {% else %}
+                        <input type="checkbox", value="clicked", name="c{{item.id}}">
+                    {% endif %}
+                    </div>
+                </div>
+                <input type="text" value="{{item.text}}" name="t{{item.id}}" class="form-control">
+            </div>
+        {% endfor %}
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<button type="submit" name="newItem" value="newItem" class="btn btn-success">Add Item</button>
+			</div>
+			<input type="text" name="new">
+            <button type="submit" name="save" value="save" class="btn btn-success btn-save">Save</button>
+		</div>
+    </form>
+    <script src="{% static 'js/delete.js' %}"></script>
+{% endblock %}

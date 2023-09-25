@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="jumbotron jumbotron-fluid bg-transparent">
+                <div class="container">
+                    <h1 class="display-4 text-center animate__animated animate__bounceIn">Do It App</h1>
+                    <hr class="my-4">
+                    <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam eget varius bibendum, velit elit bibendum nunc, vel bibendum elit sapien vel velit. Sed vel sapien vel velit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {% extends 'app/base.html'%}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% comment %} <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Welcome, {{ user.username }}!</div>
+        <div class="card-body">
+          <p>Do you want to see your <a href="/view">lists</a>?</p>
+          <p>Or maybe create a new <a href="/create">one</a>?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+<div class='jumbotron jumbotron-fluid justify-content-center'>
+    <div class='container'>
+        <h1 class='display-4 animate__animated animate__bounceIn'>You can, you will, you do it!</h1>
+        <p class='lead'>Начните делать свои задачи прямо сейчас!</p>
+        <a href='/view' class='btn btn-primary btn-lg'>Начать</a>
+    </div>
+{% endblock %}

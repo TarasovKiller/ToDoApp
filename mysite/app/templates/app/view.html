@@ -1,0 +1,49 @@
+{% extends 'app/base.html'%}
+{% load static %}
+{% load maths %}
+{% block header %}
+
+  <link rel='stylesheet' type='text/css' media='screen' href='{% static "styles/table.css" %}'>
+  {% comment %} <link rel='stylesheet' type='text/css' media='screen' href='{% static "bootstrap/css/bootstrap.min.css" %}'> {% endcomment %}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Check your tasks, {{user.username}}</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>To-do list</th>
+          <th>Completion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for to_do in lists %}
+          <tr>
+
+            <td>
+              {% comment %} <form action="{% url 'delete' to_do.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="fa-regular fa-trash-can fa-xs"></i> Delete
+                </button>
+              </form> {% endcomment %}
+              <a href="{% url 'delete_to_do' to_do.id %}" class="delete delete-todo" data-id="{{ to_do.id }}"><i class="fa-regular fa-trash-can fa-xs" style="color: #000000;"></i></a>
+              <a href="{{ to_do.id }}">{{ to_do.name }}</a>
+            </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ to_do|percent_complete }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ to_do|percent_complete }}%">
+                  {{ to_do|percent_complete }}%
+                </div>
+              </div>
+            </td>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% comment %} <script src='{% static "bootstrap/js/bootstrap.min.js" %}'></script> {% endcomment %}
+{% endblock %}
